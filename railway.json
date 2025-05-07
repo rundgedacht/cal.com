@@ -1,0 +1,10 @@
+{
+  "build": {
+    "args": {
+      "NEXTAUTH_SECRET": "${NEXTAUTH_SECRET}",
+      "NEXTAUTH_URL": "${NEXTAUTH_URL}",
+      "DATABASE_URL": "${DATABASE_URL}",
+      "ENCRYPTION_KEY": "${ENCRYPTION_KEY}"
+    }
+  }
+}
