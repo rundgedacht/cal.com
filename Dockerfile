@@ -2,25 +2,22 @@
 FROM node:18 AS builder
 WORKDIR /app
 
-# Install PNPM
-RUN npm install -g pnpm
+# Enable Yarn (required for monorepo/workspaces)
+RUN corepack enable
 
-# Copy package files and install deps
+# Copy everything & install dependencies
 COPY . .
-RUN pnpm install
-RUN pnpm build
+RUN yarn install --frozen-lockfile
+RUN yarn build
 
 # Production stage
 FROM node:18-slim
 WORKDIR /app
 
 ENV NODE_ENV=production
+RUN corepack enable
 
-# Copy built app from builder
 COPY --from=builder /app .
 
-# Expose port
 EXPOSE 3000
-
-# Start app
-CMD ["pnpm", "start"]
+CMD ["yarn", "start"]
