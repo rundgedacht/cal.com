@@ -5,7 +5,7 @@ WORKDIR /app
 COPY . .
 
 RUN corepack enable
-RUN yarn install --immutable
+RUN yarn install
 RUN yarn build
 
 EXPOSE 3000
